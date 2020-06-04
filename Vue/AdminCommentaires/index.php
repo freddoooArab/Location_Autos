@@ -1,24 +1,24 @@
-<?php $this->titre = "Le Blogue du prof - Commentaires" ?>
+<?php $this->titre = "Le Blogue du prof - Reservations" ?>
 
 <header>
-    <h1 id="titreReponses">Commentaires du Blogue du prof :</h1>
+    <h1 id="titreReponses">Reservations du Blogue du prof :</h1>
 </header>
 <?php
-foreach ($commentaires as $commentaire):
+foreach ($reservations as $reservation):
     ?>
-    <?php if ($commentaire['efface'] == '0') : ?>
-        <p><a href="AdminCommentaires/confirmer/<?= $this->nettoyer($commentaire['id']) ?>" >
+    <?php if ($reservation['efface'] == '0') : ?>
+        <p><a href="AdminReservations/confirmer/<?= $this->nettoyer($reservation['id']) ?>" >
                 [Effacer]</a>
-            <?= $this->nettoyer($commentaire['date']) ?>, <?= $this->nettoyer($commentaire['auteur']) ?> dit <?= $this->nettoyer($commentaire['prive']) ? '(EN PRIVÉ)' : '' ?> : <br/>
-            <strong><?= $this->nettoyer($commentaire['titre']) ?></strong><br/>
-            <?= $this->nettoyer($commentaire['texte']) ?><br />
-            <a href="Adminarticles/lire/<?= $this->nettoyer($commentaire['article_id']) ?>" >
-                [écrit pour l'article <i><?= $this->nettoyer($commentaire['titreArticle']) ?></i>]</a></a>
+            <?= $this->nettoyer($reservation['date']) ?>, <?= $this->nettoyer($reservation['auteur']) ?> dit <?= $this->nettoyer($reservation['prive']) ? '(EN PRIVÉ)' : '' ?> : <br/>
+            <strong><?= $this->nettoyer($reservation['titre']) ?></strong><br/>
+            <?= $this->nettoyer($reservation['texte']) ?><br />
+            <a href="Adminautos/lire/<?= $this->nettoyer($reservation['auto_id']) ?>" >
+                [écrit pour l'auto <i><?= $this->nettoyer($reservation['titreAuto']) ?></i>]</a></a>
         </p>
     <?php else : ?>
-        <p class="efface"><a href="AdminCommentaires/retablir/<?= $this->nettoyer($commentaire['id']) ?>" >
+        <p class="efface"><a href="AdminReservations/retablir/<?= $this->nettoyer($reservation['id']) ?>" >
                 [Rétablir]</a>
-            Commentaire du <?= $this->nettoyer($commentaire['date']) ?>, par <?= $this->nettoyer($commentaire['auteur']) ?> <?= $this->nettoyer($commentaire['prive']) ? '(EN PRIVÉ)' : '' ?> EFFACÉ!
+            Reservation du <?= $this->nettoyer($reservation['date']) ?>, par <?= $this->nettoyer($reservation['auteur']) ?> <?= $this->nettoyer($reservation['prive']) ? '(EN PRIVÉ)' : '' ?> EFFACÉ!
         </p>
     <?php endif; ?>
 <?php endforeach; ?>

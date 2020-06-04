@@ -13,7 +13,7 @@
             <header>
                 <a href="index.php"><h1 id="titreBlog">Location Autos</h1></a>
                 <p>Version avec démarrage de session pour accès aux opérations de gestion</p>
-                <a href="<?= $utilisateur != '' ? 'Admin' : ''; ?>Commentaires">
+                <a href="<?= $utilisateur != '' ? 'Admin' : ''; ?>Reservations">
                     <h4>Afficher toutes les voitures</h4>
                 </a>
                 <a href="apropos">

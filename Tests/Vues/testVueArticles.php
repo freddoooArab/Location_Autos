@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Framework/Vue.php';
-$articles = [
+$autos = [
     [
         'id' => '991',
         'titre' => 'titre Test 1',
@@ -21,6 +21,6 @@ $articles = [
         'type' => 'type Test 2'
     ]
 ];
-$vue = new Vue('index', 'Articles');
-$vue->generer(['articles' => $articles], null);
+$vue = new Vue('index', 'Autos');
+$vue->generer(['autos' => $autos], null);
 

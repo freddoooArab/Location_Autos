@@ -1,12 +1,12 @@
 <?php
 
-require_once 'Modele/Commentaire.php';
+require_once 'Modele/Reservation.php';
 
-$tstCommentaire = new Commentaire;
-$commentaires = $tstCommentaire->getCommentaires(1);
-echo '<h3>Test getCommentaires : </h3>';
-var_dump($commentaires->rowCount());
+$tstReservation = new Reservation;
+$reservations = $tstReservation->getReservations(1);
+echo '<h3>Test getReservations : </h3>';
+var_dump($reservations->rowCount());
 
-$commentaire = $tstCommentaire->getCommentaire(5);
-echo '<h3>Test getCommentaire : </h3>';
-var_dump($commentaire);
+$reservation = $tstReservation->getReservation(5);
+echo '<h3>Test getReservation : </h3>';
+var_dump($reservation);

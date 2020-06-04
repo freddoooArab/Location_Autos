@@ -1,32 +1,32 @@
 <?php
 
 require_once 'Controleur/ControleurAdmin.php';
-require_once 'Modele/Article.php';
-require_once 'Modele/Commentaire.php';
+require_once 'Modele/Auto.php';
+require_once 'Modele/Reservation.php';
 
-class ControleurAdminArticles extends ControleurAdmin {
+class ControleurAdminAutos extends ControleurAdmin {
 
-    private $article;
-    private $commentaire;
+    private $auto;
+    private $reservation;
 
     public function __construct() {
-        $this->article = new Article();
-        $this->commentaire = new Commentaire();
+        $this->auto = new Auto();
+        $this->reservation = new Reservation();
     }
 
-// Affiche la liste de tous les articles du blog
+// Affiche la liste de tous les autos du blog
     public function index() {
-        $articles = $this->article->getArticles();
-        $this->genererVue(['articles' => $articles]);
+        $autos = $this->auto->getAutos();
+        $this->genererVue(['autos' => $autos]);
     }
 
-// Affiche les détails sur un article
+// Affiche les détails sur un auto
     public function lire() {
-        $idArticle = $this->requete->getParametreId("id");
-        $article = $this->article->getArticle($idArticle);
+        $idAuto = $this->requete->getParametreId("id");
+        $auto = $this->auto->getAuto($idAuto);
         $erreur = $this->requete->getSession()->existeAttribut("erreur") ? $this->requete->getsession()->getAttribut("erreur") : '';
-        $commentaires = $this->commentaire->getCommentaires($idArticle);
-        $this->genererVue(['article' => $article, 'commentaires' => $commentaires, 'erreur' => $erreur]);
+        $reservations = $this->reservation->getReservations($idAuto);
+        $this->genererVue(['auto' => $auto, 'reservations' => $reservations, 'erreur' => $erreur]);
     }
 
     public function ajouter() {
@@ -34,40 +34,40 @@ class ControleurAdminArticles extends ControleurAdmin {
         $this->genererVue();
     }
 
-// Enregistre le nouvel article et retourne à la liste des articles
-    public function nouvelArticle() {
+// Enregistre le nouvel auto et retourne à la liste des autos
+    public function nouvelAuto() {
         if ($this->requete->getSession()->getAttribut("env") == 'prod') {
-            $this->requete->getSession()->setAttribut("message", "Ajouter un article n'est pas permis en démonstration");
+            $this->requete->getSession()->setAttribut("message", "Ajouter un auto n'est pas permis en démonstration");
         } else {
-            $article['utilisateur_id'] = $this->requete->getParametreId('utilisateur_id');
-            $article['titre'] = $this->requete->getParametre('titre');
-            $article['sous_titre'] = $this->requete->getParametre('sous_titre');
-            $article['texte'] = $this->requete->getParametre('texte');
-            $article['type'] = $this->requete->getParametre('type');
-            $this->article->setArticle($article);
+            $auto['utilisateur_id'] = $this->requete->getParametreId('utilisateur_id');
+            $auto['titre'] = $this->requete->getParametre('titre');
+            $auto['sous_titre'] = $this->requete->getParametre('sous_titre');
+            $auto['texte'] = $this->requete->getParametre('texte');
+            $auto['type'] = $this->requete->getParametre('type');
+            $this->auto->setAuto($auto);
             $this->executerAction('index');
         }
     }
 
-// Modifier un article existant    
+// Modifier un auto existant    
     public function modifier() {
         $id = $this->requete->getParametreId('id');
-        $article = $this->article->getArticle($id);
-        $this->genererVue(['article' => $article]);
+        $auto = $this->auto->getAuto($id);
+        $this->genererVue(['auto' => $auto]);
     }
 
-// Enregistre l'article modifié et retourne à la liste des articles
+// Enregistre l'auto modifié et retourne à la liste des autos
     public function miseAJour() {
         if ($this->requete->getSession()->getAttribut("env") == 'prod') {
-            $this->requete->getSession()->setAttribut("message", "Modifier un article n'est pas permis en démonstration");
+            $this->requete->getSession()->setAttribut("message", "Modifier un auto n'est pas permis en démonstration");
         } else {
-            $article['id'] = $this->requete->getParametreId('id');
-            $article['utilisateur_id'] = $this->requete->getParametreId('utilisateur_id');
-            $article['titre'] = $this->requete->getParametre('titre');
-            $article['sous_titre'] = $this->requete->getParametre('sous_titre');
-            $article['texte'] = $this->requete->getParametre('texte');
-            $article['type'] = $this->requete->getParametre('type');
-            $this->article->updateArticle($article);
+            $auto['id'] = $this->requete->getParametreId('id');
+            $auto['utilisateur_id'] = $this->requete->getParametreId('utilisateur_id');
+            $auto['titre'] = $this->requete->getParametre('titre');
+            $auto['sous_titre'] = $this->requete->getParametre('sous_titre');
+            $auto['texte'] = $this->requete->getParametre('texte');
+            $auto['type'] = $this->requete->getParametre('type');
+            $this->auto->updateAuto($auto);
             $this->executerAction('index');
         }
     }

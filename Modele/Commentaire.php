@@ -7,93 +7,93 @@ require_once 'Framework/Modele.php';
  * 
  * @author Baptiste Pesquet
  */
-class Commentaire extends Modele {
+class Reservation extends Modele {
 
-    // Renvoie la liste des commentaires associés à un article
-    public function getCommentaires($idArticle = NULL) {
-        if ($idArticle == NULL) {
+    // Renvoie la liste des reservations associés à un auto
+    public function getReservations($idAuto = NULL) {
+        if ($idAuto == NULL) {
             $sql = 'SELECT c.id,'
-                    . ' c.article_id,'
+                    . ' c.auto_id,'
                     . ' c.date,'
                     . ' c.auteur,'
                     . ' c.titre,'
                     . ' c.texte,'
                     . ' c.prive,'
                     . ' c.efface,'
-                    . ' a.titre as titreArticle'
-                    . ' FROM commentaires c'
-                    . ' INNER JOIN articles a'
-                    . ' ON c.article_id = a.id'
+                    . ' a.titre as titreAuto'
+                    . ' FROM reservations c'
+                    . ' INNER JOIN autos a'
+                    . ' ON c.auto_id = a.id'
                     . ' ORDER BY id desc';;
         } else {
-            $sql = 'SELECT * from commentaires'
-                    . ' WHERE article_id = ?'
+            $sql = 'SELECT * from reservations'
+                    . ' WHERE auto_id = ?'
                     . ' ORDER BY id desc';;
         }
-        $commentaires = $this->executerRequete($sql, [$idArticle]);
-        return $commentaires;
+        $reservations = $this->executerRequete($sql, [$idAuto]);
+        return $reservations;
     }
 
-    // Renvoie la liste des commentaires publics associés à un article
-    public function getCommentairesPublics($idArticle = NULL) {
-        if ($idArticle == NULL) {
+    // Renvoie la liste des reservations publics associés à un auto
+    public function getReservationsPublics($idAuto = NULL) {
+        if ($idAuto == NULL) {
             $sql = 'SELECT c.id,'
-                    . ' c.article_id,'
+                    . ' c.auto_id,'
                     . ' c.date,'
                     . ' c.auteur,'
                     . ' c.titre,'
                     . ' c.texte,'
                     . ' c.prive,'
                     . ' c.efface,'
-                    . ' a.titre as titreArticle'
-                    . ' FROM commentaires c'
-                    . ' INNER JOIN articles a'
-                    . ' ON c.article_id = a.id'
+                    . ' a.titre as titreAuto'
+                    . ' FROM reservations c'
+                    . ' INNER JOIN autos a'
+                    . ' ON c.auto_id = a.id'
                     . ' WHERE c.efface = 0 AND c.prive = 0'
                     . ' ORDER BY id desc';
         } else {
-            $sql = 'SELECT * FROM commentaires'
-                    . ' WHERE article_id = ? AND efface = 0 AND prive = 0'
+            $sql = 'SELECT * FROM reservations'
+                    . ' WHERE auto_id = ? AND efface = 0 AND prive = 0'
                     . ' ORDER BY id desc';;
         }
-        $commentaires = $this->executerRequete($sql, [$idArticle]);
-        return $commentaires;
+        $reservations = $this->executerRequete($sql, [$idAuto]);
+        return $reservations;
     }
 
-// Renvoie un commentaire spécifique
-    public function getCommentaire($id) {
-        $sql = 'SELECT * FROM commentaires'
+// Renvoie un reservation spécifique
+    public function getReservation($id) {
+        $sql = 'SELECT * FROM reservations'
                 . ' WHERE id = ?';
-        $commentaire = $this->executerRequete($sql, [$id]);
-        if ($commentaire->rowCount() == 1) {
-            return $commentaire->fetch();  // Accès à la première ligne de résultat
+        $reservation = $this->executerRequete($sql, [$id]);
+        if ($reservation->rowCount() == 1) {
+            return $reservation->fetch();  // Accès à la première ligne de résultat
         } else {
-            throw new Exception("Aucun commentaire ne correspond à l'identifiant '$id'");
+            throw new Exception("Aucun reservation ne correspond à l'identifiant '$id'");
         }
     }
 
-// Supprime un commentaire
-    public function deleteCommentaire($id) {
-        $sql = 'UPDATE commentaires'
+// Supprime un reservation
+    public function deleteReservation($id) {
+        $sql = 'UPDATE reservations'
                 . ' SET efface = 1'
                 . ' WHERE id = ?';
         $result = $this->executerRequete($sql, [$id]);
         return $result;
     }
 
-    // Réactive un commentaire
-    public function restoreCommentaire($id) {
-        $sql = 'UPDATE commentaires'
+    // Réactive un reservation
+    public function restoreReservation($id) {
+        $sql = 'UPDATE reservations'
                 . ' SET efface = 0'
                 . ' WHERE id = ?';
         $result = $this->executerRequete($sql, [$id]);
         return $result;
     }
 
-// Ajoute un commentaire associés à un article
-    public function setCommentaire($commentaire) {
-        $sql = 'INSERT INTO commentaires ('
-                . 'article_id,'
+// Ajoute un reservation associés à un auto
+    public function setReservation($reservation) {
+        $sql = 'INSERT INTO reservations ('
+                . 'auto_id,'
                 . ' date,'
                 . ' auteur,'
                 . ' titre,'
@@ -101,11 +101,11 @@ class Commentaire extends Modele {
                 . ' prive)'
                 . ' VALUES(?, NOW(), ?, ?, ?, ?)';
         $result = $this->executerRequete($sql, [
-            $commentaire['article_id'],
-            $commentaire['auteur'],
-            $commentaire['titre'],
-            $commentaire['texte'],
-            $commentaire['prive']
+            $reservation['auto_id'],
+            $reservation['auteur'],
+            $reservation['titre'],
+            $reservation['texte'],
+            $reservation['prive']
                 ]
         );
         return $result;

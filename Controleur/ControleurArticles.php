@@ -1,32 +1,32 @@
 <?php
 
 require_once 'Framework/Controleur.php';
-require_once 'Modele/Article.php';
-require_once 'Modele/Commentaire.php';
+require_once 'Modele/Auto.php';
+require_once 'Modele/Reservation.php';
 
-class ControleurArticles extends Controleur {
+class ControleurAutos extends Controleur {
 
-    private $article;
-    private $commentaire;
+    private $auto;
+    private $reservation;
 
     public function __construct() {
-        $this->article = new Article();
-        $this->commentaire = new Commentaire();
+        $this->auto = new Auto();
+        $this->reservation = new Reservation();
     }
 
-// Affiche la liste de tous les articles du blog
+// Affiche la liste de tous les autos du blog
     public function index() {
-        $articles = $this->article->getArticles();
-        $this->genererVue(['articles' => $articles]);
+        $autos = $this->auto->getAutos();
+        $this->genererVue(['autos' => $autos]);
     }
 
-// Affiche les détails sur un article
+// Affiche les détails sur un auto
     public function lire() {
-        $idArticle = $this->requete->getParametreId("id");
-        $article = $this->article->getArticle($idArticle);
+        $idAuto = $this->requete->getParametreId("id");
+        $auto = $this->auto->getAuto($idAuto);
         $erreur = $this->requete->getSession()->existeAttribut("erreur") ? $this->requete->getsession()->getAttribut("erreur") : '';
-        $commentaires = $this->commentaire->getCommentairesPublics($idArticle);
-        $this->genererVue(['article' => $article, 'commentaires' => $commentaires, 'erreur' => $erreur]);
+        $reservations = $this->reservation->getReservationsPublics($idAuto);
+        $this->genererVue(['auto' => $auto, 'reservations' => $reservations, 'erreur' => $erreur]);
     }
 
 }

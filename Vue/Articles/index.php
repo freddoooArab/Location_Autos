@@ -1,16 +1,16 @@
 <?php $this->titre = 'Le Blogue du prof'; ?>
 
-<?php foreach ($articles as $article):
+<?php foreach ($autos as $auto):
     ?>
-    <article>
+    <auto>
         <header>
-            <a href="Articles/lire/<?= $this->nettoyer($article['id']) ?>">
-                <h1 class="titreArticle"><?= $this->nettoyer($article['titre']) ?></h1>
+            <a href="Autos/lire/<?= $this->nettoyer($auto['id']) ?>">
+                <h1 class="titreAuto"><?= $this->nettoyer($auto['titre']) ?></h1>
             </a>
-            <strong class=""><?= $this->nettoyer($article['sous_titre']) ?></strong><br>
-            par <?= $this->nettoyer($article['nom']) ?><br>
-            <time><?= $this->nettoyer($article['date']) ?></time>
+            <strong class=""><?= $this->nettoyer($auto['sous_titre']) ?></strong><br>
+            par <?= $this->nettoyer($auto['nom']) ?><br>
+            <time><?= $this->nettoyer($auto['date']) ?></time>
         </header>
-    </article>
+    </auto>
     <hr />
 <?php endforeach; ?>    

@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `articles`
+-- Structure de la table `autos`
 --
 
-CREATE TABLE `articles` (
+CREATE TABLE `autos` (
   `id` int(11) NOT NULL,
   `titre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `sous_titre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -39,24 +39,24 @@ CREATE TABLE `articles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Déchargement des données de la table `articles`
+-- Déchargement des données de la table `autos`
 --
 
-INSERT INTO `articles` (`id`, `titre`, `sous_titre`, `utilisateur_id`, `date`, `texte`, `type`) VALUES
-(1, 'Premier article', 'Premier sous-titre', 1, '2020-01-24', 'Texte du premier article', 'un type'),
-(2, 'Deuxième article', 'Deuxième sous-titre', 1, '2020-02-26', 'Texte du deuxième article', 'un type'),
-(3, 'article ajouté', 's-t ajouté', 2, '2020-03-30', 'texte ajouté', 'PHP'),
-(4, 'Sans commentaire', 'Nouvelle fonctionnalité sans commentaire', 2, '2020-04-12', 'Article-test pour la nouvelle fonctionnalité indiquant qu\'un article est sans commentaire', '');
+INSERT INTO `autos` (`id`, `titre`, `sous_titre`, `utilisateur_id`, `date`, `texte`, `type`) VALUES
+(1, 'Premier auto', 'Premier sous-titre', 1, '2020-01-24', 'Texte du premier auto', 'un type'),
+(2, 'Deuxième auto', 'Deuxième sous-titre', 1, '2020-02-26', 'Texte du deuxième auto', 'un type'),
+(3, 'auto ajouté', 's-t ajouté', 2, '2020-03-30', 'texte ajouté', 'PHP'),
+(4, 'Sans reservation', 'Nouvelle fonctionnalité sans reservation', 2, '2020-04-12', 'Auto-test pour la nouvelle fonctionnalité indiquant qu\'un auto est sans reservation', '');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `commentaires`
+-- Structure de la table `reservations`
 --
 
-CREATE TABLE `commentaires` (
+CREATE TABLE `reservations` (
   `id` int(11) NOT NULL,
-  `article_id` int(11) NOT NULL,
+  `auto_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `auteur` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `titre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -66,16 +66,16 @@ CREATE TABLE `commentaires` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Déchargement des données de la table `commentaires`
+-- Déchargement des données de la table `reservations`
 --
 
-INSERT INTO `commentaires` (`id`, `article_id`, `date`, `auteur`, `titre`, `texte`, `prive`, `efface`) VALUES
-(5, 1, '2020-01-24', 'Moi mod.', 'Mon commentaire mod.', 'Voici mon commentaire modifié', 0, 0),
-(7, 1, '2020-01-29', 'Lui mod.', 'Son commentaire mod.', 'Voici son commentaire modifié', 0, 0),
-(9, 2, '2020-01-30', 'Nous', 'notre commentaire', 'Le texte de notre commentaire', 1, 0),
-(10, 2, '2020-02-01', 'Vous', 'Votre commentaire', 'Le texte de votre commentaire', 0, 1),
-(23, 1, '2020-03-12', 'Toi', 'Ton commentaire', 'Le texte de ton commentaire', 1, 0),
-(29, 2, '2020-03-12', 'a@b.c', 'Test de courriel', 'commentaire d\'un auteur avec courriel', 1, 0),
+INSERT INTO `reservations` (`id`, `auto_id`, `date`, `auteur`, `titre`, `texte`, `prive`, `efface`) VALUES
+(5, 1, '2020-01-24', 'Moi mod.', 'Mon reservation mod.', 'Voici mon reservation modifié', 0, 0),
+(7, 1, '2020-01-29', 'Lui mod.', 'Son reservation mod.', 'Voici son reservation modifié', 0, 0),
+(9, 2, '2020-01-30', 'Nous', 'notre reservation', 'Le texte de notre reservation', 1, 0),
+(10, 2, '2020-02-01', 'Vous', 'Votre reservation', 'Le texte de votre reservation', 0, 1),
+(23, 1, '2020-03-12', 'Toi', 'Ton reservation', 'Le texte de ton reservation', 1, 0),
+(29, 2, '2020-03-12', 'a@b.c', 'Test de courriel', 'reservation d\'un auteur avec courriel', 1, 0),
 (30, 3, '2020-03-30', 'a@b.c', 'courriel valide', 'test du courriel', 0, 1);
 
 -- --------------------------------------------------------
@@ -143,18 +143,18 @@ INSERT INTO `utilisateurs` (`id`, `nom`, `identifiant`, `mot_de_passe`) VALUES
 --
 
 --
--- Index pour la table `articles`
+-- Index pour la table `autos`
 --
-ALTER TABLE `articles`
+ALTER TABLE `autos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `utilisateur_id` (`utilisateur_id`);
 
 --
--- Index pour la table `commentaires`
+-- Index pour la table `reservations`
 --
-ALTER TABLE `commentaires`
+ALTER TABLE `reservations`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `article_id` (`article_id`);
+  ADD KEY `auto_id` (`auto_id`);
 
 --
 -- Index pour la table `types`
@@ -173,15 +173,15 @@ ALTER TABLE `utilisateurs`
 --
 
 --
--- AUTO_INCREMENT pour la table `articles`
+-- AUTO_INCREMENT pour la table `autos`
 --
-ALTER TABLE `articles`
+ALTER TABLE `autos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT pour la table `commentaires`
+-- AUTO_INCREMENT pour la table `reservations`
 --
-ALTER TABLE `commentaires`
+ALTER TABLE `reservations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
@@ -201,16 +201,16 @@ ALTER TABLE `utilisateurs`
 --
 
 --
--- Contraintes pour la table `articles`
+-- Contraintes pour la table `autos`
 --
-ALTER TABLE `articles`
-  ADD CONSTRAINT `articles_ibfk_1` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateurs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `autos`
+  ADD CONSTRAINT `autos_ibfk_1` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateurs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `commentaires`
+-- Contraintes pour la table `reservations`
 --
-ALTER TABLE `commentaires`
-  ADD CONSTRAINT `commentaires_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `articles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `reservations`
+  ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`auto_id`) REFERENCES `autos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,21 +1,21 @@
 <?php $this->titre = 'Le Blogue du prof'; ?>
 
-<a href="Adminarticles/ajouter">
-    <h2 class="titreArticle">Ajouter un article</h2>
+<a href="Adminautos/ajouter">
+    <h2 class="titreAuto">Ajouter un auto</h2>
 </a>
-<?php foreach ($articles as $article):
+<?php foreach ($autos as $auto):
     ?>
 
-    <article>
+    <auto>
         <header>
-            <a href="Adminarticles/lire/<?= $this->nettoyer($article['id']) ?>">
-                <h1 class="titreArticle"><?= $this->nettoyer($article['titre']) ?></h1>
+            <a href="Adminautos/lire/<?= $this->nettoyer($auto['id']) ?>">
+                <h1 class="titreAuto"><?= $this->nettoyer($auto['titre']) ?></h1>
             </a>
-            <strong class=""><?= $this->nettoyer($article['sous_titre']) ?></strong><br>
-            par <?= $this->nettoyer($article['nom']) ?><br>
-            <time><?= $this->nettoyer($article['date']) ?></time><br>
-            <a href="Adminarticles/modifier/<?= $this->nettoyer($article['id']) ?>"> [modifier l'article]</a>
+            <strong class=""><?= $this->nettoyer($auto['sous_titre']) ?></strong><br>
+            par <?= $this->nettoyer($auto['nom']) ?><br>
+            <time><?= $this->nettoyer($auto['date']) ?></time><br>
+            <a href="Adminautos/modifier/<?= $this->nettoyer($auto['id']) ?>"> [modifier l'auto]</a>
         </header>
-    </article>
+    </auto>
     <hr />
 <?php endforeach; ?>    

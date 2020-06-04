@@ -1,11 +1,11 @@
 <?php
 if (isset($_GET['test'])) {
-    if ($_GET['test'] == 'modeleArticle') {
-        require 'Tests/Modeles/testArticle.php';
-    } else if ($_GET['test'] == 'modeleCommentaire') {
-        require 'Tests/Modeles/testCommentaire.php';
-    } else if ($_GET['test'] == 'vueArticles') {
-        require 'Tests/Vues/testVueArticles.php';
+    if ($_GET['test'] == 'modeleAuto') {
+        require 'Tests/Modeles/testAuto.php';
+    } else if ($_GET['test'] == 'modeleReservation') {
+        require 'Tests/Modeles/testReservation.php';
+    } else if ($_GET['test'] == 'vueAutos') {
+        require 'Tests/Vues/testVueAutos.php';
     } else if ($_GET['test'] == 'vueConfirmer') {
         require 'Tests/Vues/testVueConfirmer.php';
     } else if ($_GET['test'] == 'vueErreur') {
@@ -18,16 +18,16 @@ if (isset($_GET['test'])) {
 <h3>Tests de Modèles</h3>
 <ul>
     <li>
-        <a href="tests.php?test=modeleArticle">Article</a>
+        <a href="tests.php?test=modeleAuto">Auto</a>
     </li>
     <li>
-        <a href="tests.php?test=modeleCommentaire">Commentaire</a>
+        <a href="tests.php?test=modeleReservation">Reservation</a>
     </li>
 </ul>
 <h3>Tests de Vues</h3>
 <ul>
     <li>
-        <a href="tests.php?test=vueArticles">Articles</a>
+        <a href="tests.php?test=vueAutos">Autos</a>
     </li>
     <li>
         <a href="tests.php?test=vueConfirmer">Confirmer</a>

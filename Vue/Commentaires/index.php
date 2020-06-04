@@ -1,18 +1,18 @@
-<?php $this->titre = "Le Blogue du prof - Commentaires" ?>
+<?php $this->titre = "Le Blogue du prof - Reservations" ?>
 
 <header>
-    <h1 id="titreReponses">Commentaires du Blogue du prof :</h1>
+    <h1 id="titreReponses">Reservations du Blogue du prof :</h1>
 </header>
 <?php
-foreach ($commentaires as $commentaire):
+foreach ($reservations as $reservation):
     ?>
     <?php 
         ?>
-        <p><?= $this->nettoyer($commentaire['date']) ?>, <?= $this->nettoyer($commentaire['auteur']) ?> dit <?= $this->nettoyer($commentaire['prive']) ? '(EN PRIVÉ)' : '' ?> : <br/>
-            <strong><?= $this->nettoyer($commentaire['titre']) ?></strong><br/>
-            <?= $this->nettoyer($commentaire['texte']) ?><br />
-            <!-- Vers Adminarticles si utilisateur en session -->
-            <a href="<?= ($utilisateur != '') ? 'Admin' : '' ?>Articles/lire/<?= $this->nettoyer($commentaire['article_id']) ?>" >
-                [écrit pour l'article <i><?= $this->nettoyer($commentaire['titreArticle']) ?></i>]</a>
+        <p><?= $this->nettoyer($reservation['date']) ?>, <?= $this->nettoyer($reservation['auteur']) ?> dit <?= $this->nettoyer($reservation['prive']) ? '(EN PRIVÉ)' : '' ?> : <br/>
+            <strong><?= $this->nettoyer($reservation['titre']) ?></strong><br/>
+            <?= $this->nettoyer($reservation['texte']) ?><br />
+            <!-- Vers Adminautos si utilisateur en session -->
+            <a href="<?= ($utilisateur != '') ? 'Admin' : '' ?>Autos/lire/<?= $this->nettoyer($reservation['auto_id']) ?>" >
+                [écrit pour l'auto <i><?= $this->nettoyer($reservation['titreAuto']) ?></i>]</a>
         </p>
 <?php endforeach; ?>

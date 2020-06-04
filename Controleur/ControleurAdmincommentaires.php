@@ -1,51 +1,51 @@
 <?php
 
 require_once 'Controleur/ControleurAdmin.php';
-require_once 'Modele/Commentaire.php';
+require_once 'Modele/Reservation.php';
 
-class ControleurAdminCommentaires extends ControleurAdmin {
+class ControleurAdminReservations extends ControleurAdmin {
 
-    private $commentaire;
+    private $reservation;
 
     public function __construct() {
-        $this->commentaire = new Commentaire();
+        $this->reservation = new Reservation();
     }
 
 // L'action index n'est pas utilisée mais pourrait ressembler à ceci 
-// en ajoutant la fonctionnalité de faire afficher tous les commentaires
+// en ajoutant la fonctionnalité de faire afficher tous les reservations
     public function index() {
-        $commentaires = $this->commentaire->getCommentaires();
-        $this->genererVue(['commentaires' => $commentaires]);
+        $reservations = $this->reservation->getReservations();
+        $this->genererVue(['reservations' => $reservations]);
     }
   
-// Confirmer la suppression d'un commentaire
+// Confirmer la suppression d'un reservation
     public function confirmer() {
         $id = $this->requete->getParametreId("id");
-        // Lire le commentaire à l'aide du modèle
-        $commentaire = $this->commentaire->getCommentaire($id);
-        $this->genererVue(['commentaire' => $commentaire]);
+        // Lire le reservation à l'aide du modèle
+        $reservation = $this->reservation->getReservation($id);
+        $this->genererVue(['reservation' => $reservation]);
     }
 
-// Supprimer un commentaire
+// Supprimer un reservation
     public function supprimer() {
         $id = $this->requete->getParametreId("id");
-        // Lire le commentaire afin d'obtenir le id de l'article associé
-        $commentaire = $this->commentaire->getCommentaire($id);
-        // Supprimer le commentaire à l'aide du modèle
-        $this->commentaire->deleteCommentaire($id);
-        //Recharger la page pour mettre à jour la liste des commentaires associés
-        $this->rediriger('Adminarticles', 'lire/' . $commentaire['article_id']);
+        // Lire le reservation afin d'obtenir le id de l'auto associé
+        $reservation = $this->reservation->getReservation($id);
+        // Supprimer le reservation à l'aide du modèle
+        $this->reservation->deleteReservation($id);
+        //Recharger la page pour mettre à jour la liste des reservations associés
+        $this->rediriger('Adminautos', 'lire/' . $reservation['auto_id']);
     }
 
-    // Rétablir un commentaire
+    // Rétablir un reservation
     public function retablir() {
         $id = $this->requete->getParametreId("id");
-        // Lire le commentaire afin d'obtenir le id de l'article associé
-        $commentaire = $this->commentaire->getCommentaire($id);
-        // Supprimer le commentaire à l'aide du modèle
-        $this->commentaire->restoreCommentaire($id);
-        //Recharger la page pour mettre à jour la liste des commentaires associés
-        $this->rediriger('Adminarticles', 'lire/' . $commentaire['article_id']);
+        // Lire le reservation afin d'obtenir le id de l'auto associé
+        $reservation = $this->reservation->getReservation($id);
+        // Supprimer le reservation à l'aide du modèle
+        $this->reservation->restoreReservation($id);
+        //Recharger la page pour mettre à jour la liste des reservations associés
+        $this->rediriger('Adminautos', 'lire/' . $reservation['auto_id']);
     }
 
 }
