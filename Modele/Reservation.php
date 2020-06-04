@@ -12,18 +12,18 @@ class Reservation extends Modele {
     // Renvoie la liste des reservations associés à un auto
     public function getReservations($idAuto = NULL) {
         if ($idAuto == NULL) {
-            $sql = 'SELECT c.id,'
-                    . ' c.auto_id,'
-                    . ' c.date,'
-                    . ' c.auteur,'
-                    . ' c.titre,'
-                    . ' c.texte,'
-                    . ' c.prive,'
-                    . ' c.efface,'
-                    . ' a.titre as titreAuto'
-                    . ' FROM reservations c'
+            $sql = 'SELECT r.id,'
+                    . ' r.nom_client,'
+                    . ' r.adresse_client,'
+                    . ' r.telephone_client,'
+                    . ' r.type_reservation,'
+                    . ' r.temps_desire,'
+                    . ' r.auto_id,'
+                    . ' a.modele as modeleAuto,'
+                    . ' a.marque as marqueAuto'
+                    . ' FROM reservations r'
                     . ' INNER JOIN autos a'
-                    . ' ON c.auto_id = a.id'
+                    . ' ON r.auto_id = a.id'
                     . ' ORDER BY id desc';;
         } else {
             $sql = 'SELECT * from reservations'
@@ -37,23 +37,23 @@ class Reservation extends Modele {
     // Renvoie la liste des reservations publics associés à un auto
     public function getReservationsPublics($idAuto = NULL) {
         if ($idAuto == NULL) {
-            $sql = 'SELECT c.id,'
-                    . ' c.auto_id,'
-                    . ' c.date,'
-                    . ' c.auteur,'
-                    . ' c.titre,'
-                    . ' c.texte,'
-                    . ' c.prive,'
-                    . ' c.efface,'
-                    . ' a.titre as titreAuto'
-                    . ' FROM reservations c'
+            $sql = 'SELECT r.id,'
+                    . ' r.nom_client,'
+                    . ' r.adresse_client,'
+                    . ' r.telephone_client,'
+                    . ' r.type_reservation,'
+                    . ' r.temps_desire,'
+                    . ' r.auto_id,'
+                    . ' a.marque as marqueAuto,'
+                    . ' a.marque as marqueAuto'
+                    . ' FROM reservations r'
                     . ' INNER JOIN autos a'
-                    . ' ON c.auto_id = a.id'
-                    . ' WHERE c.efface = 0 AND c.prive = 0'
+                    . ' ON r.auto_id = a.id'
+                    . ' WHERE a.reservee = 0'
                     . ' ORDER BY id desc';
         } else {
             $sql = 'SELECT * FROM reservations'
-                    . ' WHERE auto_id = ? AND efface = 0 AND prive = 0'
+                    . ' WHERE auto_id = ? AND reservee = 0'
                     . ' ORDER BY id desc';;
         }
         $reservations = $this->executerRequete($sql, [$idAuto]);
@@ -68,7 +68,7 @@ class Reservation extends Modele {
         if ($reservation->rowCount() == 1) {
             return $reservation->fetch();  // Accès à la première ligne de résultat
         } else {
-            throw new Exception("Aucun reservation ne correspond à l'identifiant '$id'");
+            throw new Exception("Aucune réservation ne correspond à l'identifiant '$id'");
         }
     }
 
@@ -93,19 +93,20 @@ class Reservation extends Modele {
 // Ajoute un reservation associés à un auto
     public function setReservation($reservation) {
         $sql = 'INSERT INTO reservations ('
-                . 'auto_id,'
-                . ' date,'
-                . ' auteur,'
-                . ' titre,'
-                . ' texte,'
-                . ' prive)'
-                . ' VALUES(?, NOW(), ?, ?, ?, ?)';
+                . 'nom_client,'
+                . ' adresse_client,'
+                . ' telephone_client,'
+                . ' type_reservation,'
+                . ' temps_desire,'
+                . ' auto_id)'
+                . ' VALUES(?, ?, ?, ?, ?, ?)';
         $result = $this->executerRequete($sql, [
-            $reservation['auto_id'],
-            $reservation['auteur'],
-            $reservation['titre'],
-            $reservation['texte'],
-            $reservation['prive']
+            $reservation['nom_client'],
+            $reservation['adresse_client'],
+            $reservation['telephone_client'],
+            $reservation['type_reservation'],
+            $reservation['temps_desire'],
+            $reservation['auto_id']
                 ]
         );
         return $result;

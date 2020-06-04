@@ -14,12 +14,12 @@ class Auto extends Modele {
 //        $sql = 'select autos.id, titre, sous_titre, utilisateur_id, date, texte, type, nom from autos, utilisateurs'
 //                . ' where autos.utilisateur_id = utilisateurs.id order by ID desc';
         $sql = 'SELECT a.id,'
-                . ' a.titre,'
-                . ' a.sous_titre,'
+                . ' a.marque,'
+                . ' a.modele,'
+                . ' a.annee,'
+                . ' a.tarif_horaire,'
+                . ' a.tarif_jour,'
                 . ' a.utilisateur_id,'
-                . ' a.date,'
-                . ' a.texte,'
-                . ' a.type,'
                 . ' u.nom,'
                 . ' u.identifiant'
                 . ' FROM autos a'
@@ -33,19 +33,20 @@ class Auto extends Modele {
 // Renvoie la liste de tous les autos, triés par identifiant décroissant
     public function setAuto($auto) {
         $sql = 'INSERT INTO autos ('
-                . ' titre,'
-                . ' sous_titre,'
-                . ' utilisateur_id,'
-                . ' date,'
-                . ' texte,'
-                . ' type)'
-                . ' VALUES(?, ?, ?, NOW(), ?, ?)';
+                . ' marque,'
+                . ' modele,'
+                . ' annee,'
+                . ' tarif_horaire,'
+                . ' tarif_jour,'
+                . ' utilisateur_id)'
+                . ' VALUES(?, ?, ?, ?, ?, ?)';
         $result = $this->executerRequete($sql, [
-            $auto['titre'],
-            $auto['sous_titre'],
-            $auto['utilisateur_id'],
-            $auto['texte'],
-            $auto['type']
+            $auto['marque'],
+            $auto['annee'],
+            $auto['modele'],
+            $auto['tarif_horaire'],
+            $auto['tarif_jour'],
+            $auto['utilisateur_id']
                 ]
         );
         return $result;
@@ -54,12 +55,12 @@ class Auto extends Modele {
 // Renvoie les informations sur un auto avec le nom de l'utilisateur lié
     function getAuto($idAuto) {
         $sql = 'SELECT a.id,'
-                . ' a.titre,'
-                . ' a.sous_titre,'
+                . ' a.marque,'
+                . ' a.modele,'
+                . ' a.annee,'
+                . ' a.tarif_horaire,'
+                . ' a.tarif_jour,'
                 . ' a.utilisateur_id,'
-                . ' a.date,'
-                . ' a.texte,'
-                . ' a.type,'
                 . ' u.nom'
                 . ' FROM autos a'
                 . ' INNER JOIN utilisateurs u'
@@ -69,27 +70,27 @@ class Auto extends Modele {
         if ($auto->rowCount() == 1) {
             return $auto->fetch();  // Accès à la première ligne de résultat
         } else {
-            throw new Exception("Aucun auto ne correspond à l'identifiant '$idAuto'");
+            throw new Exception("Aucune auto ne correspond à l'identifiant '$idAuto'");
         }
     }
 
 // Met à jour un auto
     public function updateAuto($auto) {
         $sql = 'UPDATE autos'
-                . ' SET titre = ?,'
-                . ' sous_titre = ?,'
-                . ' utilisateur_id = ?,'
-                . ' date = NOW(),'
-                . ' texte = ?,'
-                . ' type = ?'
+                . ' SET marque = ?,'
+                . ' modele = ?,'
+                . ' annee = ?,'
+                . ' tarif_horaire = ?,'
+                . ' tarif_jour = ?,'
+                . ' utilisateur_id = ?'
                 . ' WHERE id = ?';
         $result = $this->executerRequete($sql, [
-            $auto['titre'],
-            $auto['sous_titre'],
-            $auto['utilisateur_id'],
-            $auto['texte'],
-            $auto['type'],
-            $auto['id']
+            $auto['marque'],
+            $auto['annee'],
+            $auto['modele'],
+            $auto['tarif_horaire'],
+            $auto['tarif_jour'],
+            $auto['utilisateur_id']
                 ]
         );
         return $result;

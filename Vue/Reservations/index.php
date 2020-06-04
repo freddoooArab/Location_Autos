@@ -1,7 +1,7 @@
-<?php $this->titre = "Le Blogue du prof - Reservations" ?>
+<?php $this->titre = "Location Autos - Reservations" ?>
 
 <header>
-    <h1 id="titreReponses">Reservations du Blogue du prof :</h1>
+    <h1 id="titreReponses">Reservations :</h1>
 </header>
 <?php
 foreach ($reservations as $reservation):

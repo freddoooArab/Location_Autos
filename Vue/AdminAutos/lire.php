@@ -1,17 +1,18 @@
-<?php $this->titre = "Le Blogue du prof - " . $this->nettoyer($auto['titre']); ?>
+<?php $this->titre = "Location Autos - " . $this->nettoyer($auto['modele']); ?>
 
-<auto>
+<article>
     <header>
-        <h1 class="titreAuto"><?= $this->nettoyer($auto['titre']) ?></h1>
-        <time><?= $this->nettoyer($auto['date']) ?></time>, par <?= $this->nettoyer($auto['nom']) ?>
-        <h3 class=""><?= $this->nettoyer($auto['sous_titre']) ?></h3>
+        <h1 class="titreAuto"><?= $this->nettoyer($auto['marque']) ?> <?= $this->nettoyer($auto['modele'])?></h1>
     </header>
-    <p><?= $this->nettoyer($auto['texte']) ?></p>
-    <p><?= $this->nettoyer($auto['type']) ?></p>
-</auto>
+    <p>
+        Année : <?= $this->nettoyer($auto['annee']) ?><br>
+        Tarif horaire : <?= $this->nettoyer($auto['tarif_horaire']) ?>$<br>
+        Tarif par jour : <?= $this->nettoyer($auto['tarif_jour']) ?>$<br>
+    </p>
+</article>
 <hr />
 <header>
-    <h1 id="titreReponses">Réponses à <?= $this->nettoyer($auto['titre']) ?> :</h1>
+    <h1 id="titreReponses">Réservation <?= $this->nettoyer($auto['titre']) ?> :</h1>
 </header>
 <?= ($reservations->rowCount() == 0) ? '<p class="message">Pas encore de reservations pour cet auto.</p>' : '' ?>
 <?php
