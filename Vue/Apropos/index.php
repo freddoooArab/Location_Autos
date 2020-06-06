@@ -25,14 +25,14 @@
     <tr>
         <td>
             <h4>Base de données utilisée par l'application :</h4>
-                <img src="Contenu/images/BD_Location_Autos.png"  height="400" width="500" alt=""/>
+                <img src="Controleur/Contenu/images/BD_Location_Autos.png"  height="400" width="500" alt=""/>
             <br/>
         </td>
     </tr>
     <tr>
         <td>
             <h4>Basé sur ce modèle original :</h4>
-                <img src="Contenu/images/BD_Vente_Auto.png"  height="400" width="500" alt=""/>
+                <img src="Controleur/Contenu/images/BD_Vente_Auto.png"  height="400" width="500" alt=""/>
             <br/>
         </td>
     </tr>

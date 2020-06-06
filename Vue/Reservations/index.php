@@ -8,11 +8,11 @@ foreach ($reservations as $reservation):
     ?>
     <?php 
         ?>
-        <p><?= $this->nettoyer($reservation['date']) ?>, <?= $this->nettoyer($reservation['auteur']) ?> dit <?= $this->nettoyer($reservation['prive']) ? '(EN PRIVÉ)' : '' ?> : <br/>
-            <strong><?= $this->nettoyer($reservation['titre']) ?></strong><br/>
-            <?= $this->nettoyer($reservation['texte']) ?><br />
+        <p><?= $this->nettoyer($reservation['nom_client']) ?>, <?= $this->nettoyer($reservation['adresse_client']) ?> : <br/>
+            <strong><?= $this->nettoyer($reservation['temps_desire']) ?></strong><br/>
+            <?= $this->nettoyer($reservation['type_reservation']) ?><br />
             <!-- Vers Adminautos si utilisateur en session -->
             <a href="<?= ($utilisateur != '') ? 'Admin' : '' ?>Autos/lire/<?= $this->nettoyer($reservation['auto_id']) ?>" >
-                [écrit pour l'auto <i><?= $this->nettoyer($reservation['titreAuto']) ?></i>]</a>
+                [écrit pour l'auto <i><?= $this->nettoyer($reservation['auto_id']) ?></i>]</a>
         </p>
 <?php endforeach; ?>

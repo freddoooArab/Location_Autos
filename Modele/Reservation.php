@@ -53,7 +53,7 @@ class Reservation extends Modele {
                     . ' ORDER BY id desc';
         } else {
             $sql = 'SELECT * FROM reservations'
-                    . ' WHERE auto_id = ? AND reservee = 0'
+                    . ' WHERE auto_id = ?'
                     . ' ORDER BY id desc';;
         }
         $reservations = $this->executerRequete($sql, [$idAuto]);

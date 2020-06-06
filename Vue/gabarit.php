@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8" />
         <base href="<?= $racineWeb ?>" >
-        <link rel="stylesheet" href="Contenu/css/style.css" />
+        <link rel="stylesheet" href="Controleur/Contenu/css/style.css" />
         <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" />
         <title><?= $titre ?></title>   <!-- Élément spécifique -->
     </head>
@@ -14,7 +14,7 @@
                 <a href="index.php"><h1 id="titreBlog">Location Autos</h1></a>
                 <p>Version avec démarrage de session pour accès aux opérations de gestion</p>
                 <a href="<?= $utilisateur != '' ? 'Admin' : ''; ?>Reservations">
-                    <h4>Afficher toutes les voitures</h4>
+                    <h4>Afficher toutes les réservations</h4>
                 </a>
                 <a href="apropos">
                     <h4>À propos</h4>

@@ -12,14 +12,13 @@
 </article>
 <hr />
 <header>
-    <h1 id="titreReponses">Réservation <?= $this->nettoyer($auto['titre']) ?> :</h1>
+    <h1 id="titreReponses">Réservation <?= $this->nettoyer($auto['marque']) ?> <?= $this->nettoyer($auto['modele']) ?> :</h1>
 </header>
 <?= ($reservations->rowCount() == 0) ? '<p class="message">Pas encore de reservations pour cet auto.</p>' : '' ?>
 <?php
 foreach ($reservations as $reservation):
     ?>
     <?php if ($reservation['efface'] == '0') : ?>
-        <?= $this->nettoyer($reservation['prive']) ? '<p class="prive">' : '<p>'; ?>
         <a href="AdminReservations/confirmer/<?= $this->nettoyer($reservation['id']) ?>" >
             [Effacer]</a>
         <?= $this->nettoyer($reservation['date']) ?>, <?= $this->nettoyer($reservation['auteur']) ?> dit : <?= $this->nettoyer($reservation['prive']) ? '(EN PRIVÉ)' : '' ?><br/>

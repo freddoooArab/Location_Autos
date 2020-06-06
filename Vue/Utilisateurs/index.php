@@ -1,4 +1,4 @@
-<?php $this->titre = "Mon Blog - Connexion" ?>
+<?php $this->titre = "Location Autos - Connexion" ?>
 
 <p>Vous devez être connecté pour accéder à cette zone.</p>
 

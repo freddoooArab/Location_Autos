@@ -1,4 +1,4 @@
-<?php $this->titre = "Le Blogue du prof - ajouter un auto"; ?>
+<?php $this->titre = "Location Autos - ajouter une auto"; ?>
 
 <header>
     <h1 id="titreReponses">Ajouter un auto au nom de <u><?= $utilisateur ?></u> :</h1>

@@ -1,31 +1,31 @@
-<?php $this->titre = "Le Blogue du prof - " . $this->nettoyer($auto['titre']); ?>
+<?php $this->titre = "Location Autos - " . $this->nettoyer($auto['marque']); ?>
 
-<auto>
+<article>
     <header>
-        <h1 class="titreAuto"><?= $this->nettoyer($auto['titre']) ?></h1>
-        <time><?= $this->nettoyer($auto['date']) ?></time>, par <?= $this->nettoyer($auto['nom']) ?>
-        <h3 class=""><?= $this->nettoyer($auto['sous_titre']) ?></h3>
+        <h1 class="titreAuto"><?= $this->nettoyer($auto['marque']) ?> <?= $this->nettoyer($auto['modele']) ?></h1>
     </header>
-    <p><?= $this->nettoyer($auto['texte']) ?></p>
-    <p><?= $this->nettoyer($auto['type']) ?></p>
-</auto>
+    <p>Année : <?= $this->nettoyer($auto['annee']) ?></p>
+    <p>Tarif horaire : <?= $this->nettoyer($auto['tarif_horaire']) ?>$</p>
+    <p>Tarif par jour : <?= $this->nettoyer($auto['tarif_jour']) ?>$</p>
+</article>
 <hr />
 <header>
-    <h1 id="titreReponses">Réponses à <?= $this->nettoyer($auto['titre']) ?> :</h1>
+    <h1 id="titreReponses">Réservation de <?= $this->nettoyer($auto['marque']) ?> <?= $this->nettoyer($auto['modele']) ?></h1>
 </header>
-<?= ($reservations->rowCount() == 0) ? '<p class="message">Pas encore de reservations pour cet auto.</p>' : '' ?>
+<?= ($reservations->rowCount() == 0) ? '<p class="message">Pas encore de reservations pour cette auto.</p>' : '' ?>
 <?php
 foreach ($reservations as $reservation):
     ?>
         <p>
-            <?= $this->nettoyer($reservation['date']) ?>, <?= $this->nettoyer($reservation['auteur']) ?> dit :<br/>
-            <strong><?= $this->nettoyer($reservation['titre']) ?></strong><br/>
-            <?= $this->nettoyer($reservation['texte']) ?>
+            Nom du client : <?= $this->nettoyer($reservation['nom_client']) ?><br/>
+            Type de réservation : <?= $this->nettoyer($reservation['type_reservation']) ?><br/>
+            Durée de la réservation : <?= $this->nettoyer($reservation['temps_desire']) ?><br/>
         </p>
 <?php endforeach; ?>
 
+<?php if($reservations->rowCount()== 0) : ?>
 <form action="Reservations/ajouter" method="post">
-    <h2>Ajouter un reservation</h2>
+    <h2>Faire un reservation</h2>
     <p>
         <label for="auteur">Courriel de l'auteur (xxx@yyy.zz)</label> : <input type="text" name="auteur" id="auteur" /> 
         <?= ($erreur == 'courriel') ? '<span style="color : red;">Entrez un courriel valide s.v.p.</span>' : '' ?> 
@@ -37,5 +37,11 @@ foreach ($reservations as $reservation):
         <input type="submit" value="Envoyer" />
     </p>
 </form>
+<?php else : ?>    
+        <hr/>
+        <h3>Temps restant à la location : </h3>
+        <!--Mettre le compteur de temps restant sur la location.-->
+<?php endif; ?>
+
 
 

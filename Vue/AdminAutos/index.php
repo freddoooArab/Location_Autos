@@ -6,7 +6,7 @@
 <?php foreach ($autos as $auto):
     ?>
 
-    <auto>
+    <article>
         <header>
             <a href="Adminautos/lire/<?= $this->nettoyer($auto['id']) ?>">
                 <h1 class="titreAuto"><?= $this->nettoyer($auto['marque']) ?> <?= $this->nettoyer($auto['modele']) ?></h1>
@@ -16,6 +16,6 @@
              Tarif par jour : <?= $this->nettoyer($auto['tarif_jour']) ?>$<br>
             <a href="Adminautos/modifier/<?= $this->nettoyer($auto['id']) ?>"> [modifier l'auto]</a>
         </header>
-    </auto>
+    </article>
     <hr />
 <?php endforeach; ?>    
