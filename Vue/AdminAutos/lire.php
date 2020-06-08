@@ -18,19 +18,11 @@
 <?php
 foreach ($reservations as $reservation):
     ?>
-    <?php if ($reservation['efface'] == '0') : ?>
         <a href="AdminReservations/confirmer/<?= $this->nettoyer($reservation['id']) ?>" >
-            [Effacer]</a>
-        <?= $this->nettoyer($reservation['date']) ?>, <?= $this->nettoyer($reservation['auteur']) ?> dit : <?= $this->nettoyer($reservation['prive']) ? '(EN PRIVÉ)' : '' ?><br/>
-        <strong><?= $this->nettoyer($reservation['titre']) ?></strong><br/>
-        <?= $this->nettoyer($reservation['texte']) ?>
-        </p>
-    <?php else : ?>
-        <p class="efface"><a href="AdminReservations/retablir/<?= $this->nettoyer($reservation['id']) ?>" >
-                [Rétablir]</a>
-            Reservation du <?= $this->nettoyer($reservation['date']) ?>, par <?= $this->nettoyer($reservation['auteur']) ?> <?= $this->nettoyer($reservation['prive']) ? '(EN PRIVÉ)' : '' ?> effacé!
-        </p>
-    <?php endif; ?>
+            [Effacer]</a><br/>
+        <?= $this->nettoyer($reservation['nom_client']) ?><br/>
+        <?= $this->nettoyer($reservation['adresse_client']) ?><br/> 
+        <?= $this->nettoyer($reservation['telephone_client'])?><br/>
 <?php endforeach; ?>
 
 

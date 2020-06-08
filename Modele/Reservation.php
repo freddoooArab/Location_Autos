@@ -74,8 +74,7 @@ class Reservation extends Modele {
 
 // Supprime un reservation
     public function deleteReservation($id) {
-        $sql = 'UPDATE reservations'
-                . ' SET efface = 1'
+        $sql = 'DELETE FROM reservations'
                 . ' WHERE id = ?';
         $result = $this->executerRequete($sql, [$id]);
         return $result;

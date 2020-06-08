@@ -1,16 +1,16 @@
-<?php $this->titre = "Effacer - " . $this->nettoyer($reservation['titre']); ?>
+<?php $this->titre = "Effacer - " . $this->nettoyer($reservation['nom_client']); ?>
 
-<auto>
+<article>
     <header>
         <p><h1>
             Effacer?
         </h1>
-        <?= $this->nettoyer($reservation['date']) ?>, <?= $this->nettoyer($reservation['auteur']) ?> dit : (privé? <?= $this->nettoyer($reservation['prive']) ?>)<br/>
-        <strong><?= $this->nettoyer($reservation['titre']) ?></strong><br/>
-        <?= $this->nettoyer($reservation['texte']) ?>
+        <?= $this->nettoyer($reservation['nom_client']) ?><br/>
+        <?= $this->nettoyer($reservation['adresse_client']) ?><br/> 
+        <?= $this->nettoyer($reservation['telephone_client'])?><br/>
         </p>
     </header>
-</auto>
+</article>
 
 <form action="AdminReservations/supprimer" method="post">
     <input type="hidden" name="id" value="<?= $this->nettoyer($reservation['id']) ?>" /><br />

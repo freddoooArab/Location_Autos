@@ -1,19 +1,16 @@
 <?php $this->titre = "Location Autos - " . $this->nettoyer($auto['marque']); ?>
 
 <header>
-    <h1 id="titreReponses">Modifier une auto de l'utilisateur 1 :</h1>
+    <h1 id="titreReponses">Modifier l'auto <?= $this->nettoyer($auto['marque']) ?> :</h1>
 </header>
+<h2>Modifier les tarifs d'une auto</h2>
 <form action="Adminautos/miseAJour" method="post">
-    <h2>Modifier une auto</h2>
-    <p>
-        <label for="auteur">Titre</label> : <input type="text" name="titre" id="titre" value="<?= $this->nettoyer($auto['titre']) ?>" /> <br />
-        <label for="sous_titre">Sous-titre</label> :  <input type="text" name="sous_titre" id="sous_titre" value="<?= $this->nettoyer($auto['sous_titre']) ?>" /><br />
-        <label for="texte">Texte de l'auto</label> :  <textarea name="texte" id="texte" ><?= $this->nettoyer($auto['texte']) ?></textarea><br />
-        <label for="type">Sujet</label> : <input type="text" name="type" id="auto" value="<?= $this->nettoyer($auto['type']) ?>" /> <br />
-        <input type="hidden" name="utilisateur_id" value="<?= $idUtilisateur ?>" /><br />
-        <input type="hidden" name="id" value="<?= $this->nettoyer($auto['id']) ?>" /><br />
+        <label for="marque">Marque</label> : <input readonly type="text" value="<?= $this->nettoyer($auto['marque']) ?>"  name="marque" id="marque"/><br/>
+        <label for="modele">Modèle</label> : <input readonly type="text" value="<?= $this->nettoyer($auto['modele']) ?>"  name="modele" id="modele"/><br/>
+        <label for="tarif_horaire">Tarif horaire</label> : <input type="number" min="10" name="tarif_horaire" id="tarif_horaire" /> <br />
+        <label for="tarif_jour">Tarif Journalier</label> : <input type="number" min="10" name="tarif_jour" id="tarif_jour" /> <br />
+        <label type="hidden" for="id"></label><input type="hidden" name="id" id="id" value="<?= $this->nettoyer($auto['id']) ?>" /><br />
         <input type="submit" value="Modifier" />
-    </p>
 </form>
 
 

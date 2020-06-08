@@ -38,14 +38,16 @@ class Auto extends Modele {
                 . ' annee,'
                 . ' tarif_horaire,'
                 . ' tarif_jour,'
+                . ' reservee,'
                 . ' utilisateur_id)'
-                . ' VALUES(?, ?, ?, ?, ?, ?)';
+                . ' VALUES(?, ?, ?, ?, ?, ?, ?)';
         $result = $this->executerRequete($sql, [
             $auto['marque'],
-            $auto['annee'],
             $auto['modele'],
+            $auto['annee'],
             $auto['tarif_horaire'],
             $auto['tarif_jour'],
+            $auto['reservee'],
             $auto['utilisateur_id']
                 ]
         );
@@ -79,18 +81,16 @@ class Auto extends Modele {
         $sql = 'UPDATE autos'
                 . ' SET marque = ?,'
                 . ' modele = ?,'
-                . ' annee = ?,'
                 . ' tarif_horaire = ?,'
-                . ' tarif_jour = ?,'
-                . ' utilisateur_id = ?'
+                . ' tarif_jour = ?'
                 . ' WHERE id = ?';
+        echo "<script>console.log('SQL: " . $sql . "' );</script>";
         $result = $this->executerRequete($sql, [
             $auto['marque'],
-            $auto['annee'],
             $auto['modele'],
             $auto['tarif_horaire'],
             $auto['tarif_jour'],
-            $auto['utilisateur_id']
+            $auto['id']
                 ]
         );
         return $result;

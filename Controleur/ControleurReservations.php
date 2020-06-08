@@ -20,31 +20,23 @@ class ControleurReservations extends Controleur {
 
 // Ajoute un reservation à un auto
     public function ajouter() {
-        $reservation['auto_id'] = $this->requete->getParametreId("auto_id");
-        $reservation['auteur'] = $this->requete->getParametre('auteur');
-        $validation_courriel = filter_var($reservation['auteur'], FILTER_VALIDATE_EMAIL);
-        if ($validation_courriel) {
-            if ($this->requete->getSession()->getAttribut("env") == 'prod') {
-                $this->requete->getSession()->setAttribut("message", "Ajouter un reservation n'est pas permis en démonstration");
-            } else {
-                $reservation['titre'] = $this->requete->getParametre('titre');
-                $reservation['texte'] = $this->requete->getParametre('texte');
-                // Ajuster la valeur de la case à cocher
-                $reservation['prive'] = $this->requete->existeParametre('prive') ? 1 : 0;
-                // Ajouter le reservation à l'aide du modèle
-                $this->reservation->setReservation($reservation);
-            }
-            // Éliminer un code d'erreur éventuel
-            if ($this->requete->getSession()->existeAttribut('erreur')) {
-                $this->requete->getsession()->setAttribut('erreur', '');
-            }
-            //Recharger la page pour mettre à jour la liste des reservations associés
-            $this->rediriger('Autos', 'lire/' . $reservation['auto_id']);
+        echo "<script>console.log('Debug Objects: " . "ta marraine" . "' );</script>";
+
+         if ($this->requete->getSession()->getAttribut("env") == 'prod') {
+            $this->requete->getSession()->setAttribut("message", "Ajouter une reservation n'est pas permis en démonstration");
         } else {
-            //Recharger la page avec une erreur près du courriel
-            $this->requete->getSession()->setAttribut('erreur', 'courriel');
-            $this->rediriger('Autos', 'lire/' . $reservation['auto_id']);
+            $reservation['id'] = null;
+            $reservation['nom_client'] = $this->requete->getParametreId("nom_client");
+            $reservation['adresse_client'] = $this->requete->getParametre('adresse_client');
+            $reservation['telephone_client'] = $this->requete->getParametre('telephone_client');
+            $reservation['type_reservation'] = $this->requete->getParametre('type_reservation');
+            $reservation['temps_desire'] = $this->requete->getParametre('temps_desire');
+            $reservation['auto_id'] = $this->requete->getParametre('auto_id');
+        // Ajouter le reservation à l'aide du modèle
+        $this->reservation->setReservation($reservation);
+          $vue = new Vue("index");
+        $this->genererVue();
         }
     }
-
-}
+        
+ }
